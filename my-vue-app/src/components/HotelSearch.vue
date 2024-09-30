@@ -13,7 +13,7 @@
       <p v-if="error">{{ error }}</p>
       <div v-for="hotel in hotels" :key="hotel.id">
       <h2>{{ hotel.name }}</h2>
-      <router-link :to="`/hotel/${hotel.id}`">View Details</router-link>
+      <router-link :to="{ name: 'HotelDetails', params: { hotelId: hotel.id } }">View Details</router-link>
     </div>
     </div>
   </template>

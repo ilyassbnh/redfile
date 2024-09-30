@@ -20,6 +20,13 @@ const routes = [
         path: 'hotel/:id', // Dynamic route for hotel details
         component: HotelDetails,
       },
+      {
+        path: '/hotel/:hotelId',
+        name: 'HotelDetails',
+        component: HotelDetails,
+    }
+    
+    
     ],
   },
 ];

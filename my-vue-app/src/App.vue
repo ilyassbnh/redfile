@@ -1,19 +1,16 @@
 <template>
-  <div id="app">
-    <MainLayout /> <!-- Use your main layout or components here -->
+  <div>
+    <MainLayout />
+    <Chatbot />
   </div>
 </template>
-
 <script>
-import MainLayout from './components/MainLayout.vue'; // Adjust if needed
-
+import Chatbot from './components/Chatbot.vue';
+import MainLayout from './components/MainLayout.vue';
 export default {
   components: {
+    Chatbot,
     MainLayout,
   },
 };
 </script>
-
-<style>
-/* Add your styles here */
-</style>
