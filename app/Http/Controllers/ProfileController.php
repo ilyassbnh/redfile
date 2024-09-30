@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function edit() {
-        return view('user.profile.edit');
+    public function edit(Request $request) {
+        return response()->json($request->user());
     }
 
     public function update(Request $request) {
@@ -15,7 +15,10 @@ class ProfileController extends Controller
             'name' => 'required',
             'email' => 'required|email',
         ]);
-        $request->user()->update($request->all());
-        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully.');
+
+        $request->user()->update($request->only(['name', 'email']));
+
+        return response()->json(['success' => 'Profile updated successfully.']);
     }
 }
+
