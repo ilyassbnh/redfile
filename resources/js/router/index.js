@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from '../components/Login.vue';
-import MainLayout from '../components/MainLayout.vue';
-import HotelSearch from '../components/HotelSearch.vue';
-import HotelDetails from '../components/HotelDetails.vue';
-import Register from '../components/Register.vue';
+import Login from '../../../resources/components/Login.vue';
+import MainLayout from '../../../resources/components/MainLayout.vue';
+import HotelSearch from '../../../resources/components/HotelSearch.vue';
+import HotelDetails from '../../../resources/components/HotelDetails.vue';
+import Register from '../../../resources/components/Register.vue';
 
 const routes = [
     {
