@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User; // Ensure the User model is imported
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth; // Import Auth facade
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class ProviderController extends Controller
@@ -29,33 +26,9 @@ class ProviderController extends Controller
      */
     public function callback($provider)
     {
-        // Obtain the user information from the provider
-        $socialiteUser = Socialite::driver($provider)->user();
-        
-        // Adjusted to correctly query the user
-        $user = User::where('provider_id', $provider . '|' . $socialiteUser->id)->first();
+        $user = Socialite::driver($provider)->user();
 
-        if ($user) {
-            // Update the existing user
-            $user->update([
-                'github_token' => $socialiteUser->token,
-                'github_refresh_token' => $socialiteUser->refreshToken,
-            ]);
-        } else {
-            // Create a new user
-            $user = User::create([
-                'name' => $socialiteUser->name,
-                'email' => $socialiteUser->email,
-                'provider_id' => $provider . '|' . $socialiteUser->id, // Save provider and ID together
-                'github_token' => $socialiteUser->token,
-                'github_refresh_token' => $socialiteUser->refreshToken,
-            ]);
-        }
-
-        // Log in the user
-        Auth::login($user);
-
-        // Redirect to the dashboard or the intended page
-        return redirect()->intended('/dashboard');
+        // You can now process the user data, e.g., create or login the user
+        dd($user);
     }
 }
