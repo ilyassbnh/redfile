@@ -1,17 +1,7 @@
-require('./bootstrap'); // Charge Bootstrap et autres dépendances
+import './bootstrap';
 
-import Vue from 'vue/dist/vue.esm'; // Importer la version complète
+import Alpine from 'alpinejs';
 
-// Si tu veux enregistrer un composant
-// import MyComponent from './components/MyComponent.vue';
-// Vue.component('my-component', MyComponent);
+window.Alpine = Alpine;
 
-const app = new Vue({
-    el: '#app',
-    data: {
-        // Ajoute tes données ici
-    },
-    methods: {
-        // Ajoute tes méthodes ici
-    }
-});
+Alpine.start();
