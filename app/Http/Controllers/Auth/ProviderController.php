@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProviderController extends Controller
 {
@@ -25,10 +27,21 @@ class ProviderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function callback($provider)
-    {
-        $user = Socialite::driver($provider)->user();
+{
+    $githubUser = Socialite::driver($provider)->user();
 
-        // You can now process the user data, e.g., create or login the user
-        dd($user);
-    }
+    $user = User::updateOrCreate([
+        'email' => $githubUser->email, // Use email to check for existing user
+    ], [
+        'provider_id' => $githubUser->id,
+        'name' => $githubUser->name,
+        'password' => '', // Leave password empty or set a default
+        'provider_token' => $githubUser->token,
+    ]);
+
+    Auth::login($user);
+
+    return redirect('/dashboard');
+}
+
 }
